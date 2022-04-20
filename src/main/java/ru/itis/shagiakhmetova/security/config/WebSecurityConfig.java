@@ -45,8 +45,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/signUp").permitAll()
                 .antMatchers("/signIn").permitAll()
                 .antMatchers("/").authenticated()
-                .antMatchers("/profile").authenticated()
-//                .antMatchers("/accounts/**").hasAuthority("ADMIN")
+                .antMatchers("/profile/**").authenticated()
+                .antMatchers("/accounts/**").hasAuthority("ADMIN")
                 .and()
                 .formLogin()
                 .loginPage("/signIn")
@@ -61,6 +61,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/signIn?logout")
                 .deleteCookies("JSESSIONID")
                 .invalidateHttpSession(true);
+
     }
 
     @Bean

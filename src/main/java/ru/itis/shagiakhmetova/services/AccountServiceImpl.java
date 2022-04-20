@@ -6,20 +6,23 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.itis.shagiakhmetova.dto.AccountDto;
 import ru.itis.shagiakhmetova.dto.SignUpForm;
 import ru.itis.shagiakhmetova.models.Account;
 import ru.itis.shagiakhmetova.repositories.AccountRepository;
 import ru.itis.shagiakhmetova.util.EmailUtil;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
+import static ru.itis.shagiakhmetova.dto.AccountDto.from;
 
 @Service
 @RequiredArgsConstructor
 public class AccountServiceImpl implements AccountService {
 
     @Autowired
-    private AccountRepository accountRepository;
+    private final AccountRepository accountRepository;
 
     private final PasswordEncoder passwordEncoder;
 
@@ -59,4 +62,15 @@ public class AccountServiceImpl implements AccountService {
         accountRepository.save(account);
     }
 
+    @Override
+    public List<AccountDto> getAllAccounts() {
+        return from(accountRepository.findAllByState(Account.State.CONFIRMED));
+    }
+
+    @Override
+    public void deleteAccount(Long accountId) {
+        Account account = accountRepository.getById(accountId);
+        account.setState(Account.State.DELETED);
+        accountRepository.save(account);
+    }
 }

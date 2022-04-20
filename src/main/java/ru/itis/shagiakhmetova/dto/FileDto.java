@@ -9,8 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class SignInForm {
-    private String email;
-    private String password;
-
+public class FileDto {
+    private String avatar;
 }

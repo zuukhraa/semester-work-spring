@@ -41,6 +41,8 @@ public class Account {
 
     private String faculty_name;
 
+    private String avatar;
+
     @Column(length = 64)
     private String confirmCode;
 

@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 @Entity
+@Table(name = "posts")
 public class Post {
     public enum State {
        DELETED, PUBLISHED

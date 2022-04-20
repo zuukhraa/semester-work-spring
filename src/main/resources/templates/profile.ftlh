@@ -1,17 +1,26 @@
 <!doctype html>
 <html lang="en">
+<meta charset="UTF-8">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Личная страница</title>
 </head>
 <body>
 <h1>Профиль!</h1>
-<form action="/profile" method="post" novalidate enctype="multipart/form-data">
-    <td><p class="lead">Добро пожаловать, ${signUpForm.firstName} ${signUpForm.lastName}!</p></td>
-    <td><p class="lead">Ваш факультет: ${signUpForm.faculty_name}</p></td>
+<td><p class="lead">Добро пожаловать, ${account.firstName} ${account.lastName}!</p></td>
+<td><p class="lead">Ваш факультет: ${account.faculty_name}</p></td>
+<br>
+
+<form action="/profile/${account.id}/post" method="post">
+
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+
+    <td><p class="lead"><a href="/posts">Все посты</a></p></td>
+    <td><p class="lead">Добавить пост:</p></td>
+
+    <input type="text" name="title" placeholder="Title">
+    <input type="text" name="text" placeholder="Text">
+
+    <input type="submit" value="Add">
 </form>
 <h2><a href="/logout">Выход</a></h2>
 </body>
