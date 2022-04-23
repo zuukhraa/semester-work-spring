@@ -1,6 +1,8 @@
 package ru.itis.shagiakhmetova.services;
 
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -11,15 +13,16 @@ import ru.itis.shagiakhmetova.dto.SignUpForm;
 import ru.itis.shagiakhmetova.models.Account;
 import ru.itis.shagiakhmetova.repositories.AccountRepository;
 import ru.itis.shagiakhmetova.util.EmailUtil;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.UUID;
+
+import java.util.*;
+
 import static ru.itis.shagiakhmetova.dto.AccountDto.from;
 
 @Service
 @RequiredArgsConstructor
 public class AccountServiceImpl implements AccountService {
+
+    public static final Logger LOGGER = LoggerFactory.getLogger(AccountServiceImpl.class);
 
     @Autowired
     private final AccountRepository accountRepository;
@@ -73,4 +76,16 @@ public class AccountServiceImpl implements AccountService {
         account.setState(Account.State.DELETED);
         accountRepository.save(account);
     }
+
+    @Override
+    public void update(AccountDto accountDto, String email) {
+        accountRepository.updateUser(accountDto.getFirstName(), accountDto.getLastName(), passwordEncoder.encode(accountDto.getPassword()), email);
+    }
+
+    @Override
+    public Optional<Account> getAccountByEmail(String email) {
+        return accountRepository.getAccountByEmail(email);
+    }
 }
+
+
