@@ -1,4 +1,4 @@
-package ru.itis.shagiakhmetova.services;
+package ru.itis.shagiakhmetova.services.Impl;
 
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -12,6 +12,7 @@ import ru.itis.shagiakhmetova.dto.AccountDto;
 import ru.itis.shagiakhmetova.dto.SignUpForm;
 import ru.itis.shagiakhmetova.models.Account;
 import ru.itis.shagiakhmetova.repositories.AccountRepository;
+import ru.itis.shagiakhmetova.services.AccountService;
 import ru.itis.shagiakhmetova.util.EmailUtil;
 
 import java.util.*;

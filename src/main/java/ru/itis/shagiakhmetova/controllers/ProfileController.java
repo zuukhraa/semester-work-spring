@@ -8,12 +8,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import ru.itis.shagiakhmetova.dto.AccountDto;
 import ru.itis.shagiakhmetova.dto.PostDto;
 import ru.itis.shagiakhmetova.models.Account;
 import ru.itis.shagiakhmetova.security.details.AccountUserDetails;
 import ru.itis.shagiakhmetova.services.AccountService;
+import ru.itis.shagiakhmetova.services.FileService;
 import ru.itis.shagiakhmetova.services.PostService;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.Optional;
 
@@ -26,6 +29,8 @@ public class ProfileController {
 
     private final AccountService accountService;
 
+    private final FileService fileService;
+
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/profile")
     public String getProfilePage(@AuthenticationPrincipal AccountUserDetails userDetails, Model model) {
@@ -33,9 +38,6 @@ public class ProfileController {
         if (accountByEmail.isPresent()) {
             Account account = accountByEmail.get();
             model.addAttribute("account", account);
-            model.addAttribute("firstName", account.getFirstName());
-            model.addAttribute("lastName", account.getLastName());
-            model.addAttribute("password", account.getPassword());
         }
         return "profile";
     }
@@ -63,4 +65,16 @@ public class ProfileController {
         accountService.update(accountDto, email);
         return "redirect:/profile";
     }
+
+    @GetMapping("/profile/files/{filename}")
+    public void getFile(@PathVariable(name = "filename") String storageFileName, HttpServletResponse response) {
+        fileService.getFileByStorageName(storageFileName, response);
+    }
+
+    @PostMapping("profile/files/{account-id}/upload")
+    public String uploadAvatar(@PathVariable(name = "account-id") Long accountId, @RequestParam("file") MultipartFile multipartFile) {
+        fileService.uploadAvatar(multipartFile, accountId);
+        return "redirect:/profile";
+    }
 }
+

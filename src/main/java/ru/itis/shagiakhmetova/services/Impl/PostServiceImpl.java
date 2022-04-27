@@ -1,4 +1,4 @@
-package ru.itis.shagiakhmetova.services;
+package ru.itis.shagiakhmetova.services.Impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +8,8 @@ import ru.itis.shagiakhmetova.models.Account;
 import ru.itis.shagiakhmetova.models.Post;
 import ru.itis.shagiakhmetova.repositories.AccountRepository;
 import ru.itis.shagiakhmetova.repositories.PostRepository;
+import ru.itis.shagiakhmetova.services.PostService;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
