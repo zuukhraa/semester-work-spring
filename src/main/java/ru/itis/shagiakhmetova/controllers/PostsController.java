@@ -1,14 +1,14 @@
 package ru.itis.shagiakhmetova.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import ru.itis.shagiakhmetova.dto.PostDto;
 import ru.itis.shagiakhmetova.services.PostService;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
@@ -24,11 +24,14 @@ public class PostsController {
         return "posts";
     }
 
-    @PreAuthorize("isAuthenticated()")
-    @PostMapping("/{post-id}/delete")
-    public String deleteAccount(@PathVariable("post-id") Long postId) {
-        postService.deletePost(postId);
-        return "redirect:/posts";
+    @GetMapping("/search")
+    public String getPostsSearchPage() {
+        return "searchPost";
     }
 
+    @GetMapping(value = "/search/{title}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public List<PostDto> searchPostByTitle(@PathVariable("title") String title) {
+        return postService.searchPostByTitle(title);
+    }
 }

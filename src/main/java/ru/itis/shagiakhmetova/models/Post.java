@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
@@ -23,10 +23,10 @@ public class Post {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "account_id")
+    @JoinColumn(name = "account_email")
     private Account account;
 
-    private LocalDateTime createdAt;
+    private LocalDate createdAt;
 
     @Column
     private String title;

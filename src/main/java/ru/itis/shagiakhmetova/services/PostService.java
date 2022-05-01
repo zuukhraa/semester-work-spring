@@ -7,4 +7,5 @@ public interface PostService {
     void addPost(PostDto postDto, Long accountId);
     List<PostDto> getAllPosts();
     void deletePost(Long postId);
+    List<PostDto> searchPostByTitle(String title);
 }

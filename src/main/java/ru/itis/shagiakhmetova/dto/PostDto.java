@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import ru.itis.shagiakhmetova.models.Post;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,7 +19,7 @@ public class PostDto {
 
     private Long id;
 
-    private LocalDateTime createdAt;
+    private LocalDate createdAt;
 
     @NotBlank
     @Size(min = 2, max = 20)
@@ -29,7 +29,7 @@ public class PostDto {
     @Size(min = 2, max = 500)
     private String text;
 
-    private Long accountId;
+    private String accountEmail;
 
     public static PostDto from(Post post) {
         return PostDto.builder()
@@ -37,7 +37,7 @@ public class PostDto {
                 .createdAt(post.getCreatedAt())
                 .title(post.getTitle())
                 .text(post.getText())
-                .accountId(post.getAccount().getId())
+                .accountEmail(post.getAccount().getEmail())
                 .build();
     }
 

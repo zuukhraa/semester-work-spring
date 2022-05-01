@@ -9,10 +9,8 @@ import ru.itis.shagiakhmetova.models.Post;
 import ru.itis.shagiakhmetova.repositories.AccountRepository;
 import ru.itis.shagiakhmetova.repositories.PostRepository;
 import ru.itis.shagiakhmetova.services.PostService;
-
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
-
 import static ru.itis.shagiakhmetova.dto.PostDto.from;
 
 @Service
@@ -32,7 +30,7 @@ public class PostServiceImpl implements PostService {
                 .title(postDto.getTitle())
                 .text(postDto.getText())
                 .state(Post.State.PUBLISHED)
-                .createdAt(LocalDateTime.now())
+                .createdAt(LocalDate.now())
                 .account(account)
                 .build();
         postRepository.save(newPost);
@@ -44,6 +42,12 @@ public class PostServiceImpl implements PostService {
         post.setState(Post.State.DELETED);
         postRepository.save(post);
     }
+
+    @Override
+    public List<PostDto> searchPostByTitle(String title) {
+        return from(postRepository.findAllByTitleLike('%' + title + '%'));
+    }
+
 
     @Override
     public List<PostDto> getAllPosts() {
