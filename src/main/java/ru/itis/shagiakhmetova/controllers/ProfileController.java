@@ -1,7 +1,6 @@
 package ru.itis.shagiakhmetova.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -24,7 +23,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ProfileController {
 
-    @Autowired
     private final PostService postService;
 
     private final AccountService accountService;
@@ -44,7 +42,10 @@ public class ProfileController {
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("profile/{account-id}/post")
-    public String addPost(@PathVariable("account-id") Long accountId,PostDto post) {
+    public String addPost(@PathVariable("account-id") Long accountId, @Valid PostDto post, BindingResult result) {
+        if (result.hasErrors()) {
+            return "redirect:/profile";
+        }
         postService.addPost(post, accountId);
         return "redirect:/profile";
     }
@@ -56,7 +57,7 @@ public class ProfileController {
     }
 
     @PostMapping("/profile/update")
-    public String update(@Valid AccountDto accountDto, @AuthenticationPrincipal AccountUserDetails userDetails, BindingResult result, Model model) {
+    public String update(@Valid AccountDto accountDto, BindingResult result, @AuthenticationPrincipal AccountUserDetails userDetails, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("accountDto", accountDto);
             return "changes";

@@ -1,6 +1,7 @@
 package ru.itis.shagiakhmetova.services.Impl;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.itis.shagiakhmetova.dto.PostDto;
@@ -15,6 +16,7 @@ import static ru.itis.shagiakhmetova.dto.PostDto.from;
 
 @Service
 @RequiredArgsConstructor
+@Log4j2
 public class PostServiceImpl implements PostService {
 
     @Autowired
@@ -47,7 +49,6 @@ public class PostServiceImpl implements PostService {
     public List<PostDto> searchPostByTitle(String title) {
         return from(postRepository.findAllByTitleLike('%' + title + '%'));
     }
-
 
     @Override
     public List<PostDto> getAllPosts() {

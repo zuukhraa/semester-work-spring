@@ -11,10 +11,12 @@
             border-radius: 50%;
         }
     </style>
+    <#include "head.ftlh"/>
 </head>
 <body>
-<h1>Профиль!</h1>
+<br>
 <td><p class="lead">Добро пожаловать, ${account.firstName} ${account.lastName}!</p></td>
+<br>
 <td><p class="lead">Ваш факультет: ${account.faculty_name}</p></td>
 <br>
 <#if account.avatar ?? >
@@ -25,22 +27,26 @@
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 
     <td><p class="lead"><a href="/posts">Все посты</a></p></td>
+    <br>
+    <td><p class="lead"><a href="/classes">Занятия</a></p></td>
+    <br>
     <td><p class="lead"><a href="profile/update">Изменить данные</a></p></td>
+    <br>
     <td><p class="lead">Добавить пост:</p></td>
-
+    <br>
     <input type="text" name="title" placeholder="Title">
     <input type="text" name="text" placeholder="Text">
-
     <input type="submit" value="Add">
 </form>
-
+<br>
 <td><p class="lead">Загрузить аватар:</p></td>
+<br>
 <form action="/profile/files/${account.id}/upload" method="post" enctype="multipart/form-data">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
     <input type="file" name="file">
     <input type="submit" value="Загрузить">
 </form>
-
+<br>
 <h2><a href="/logout">Выход</a></h2>
 </body>
 </html>

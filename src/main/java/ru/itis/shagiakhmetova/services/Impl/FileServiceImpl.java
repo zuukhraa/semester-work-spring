@@ -1,6 +1,7 @@
 package ru.itis.shagiakhmetova.services.Impl;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,6 @@ import ru.itis.shagiakhmetova.models.File;
 import ru.itis.shagiakhmetova.repositories.AccountRepository;
 import ru.itis.shagiakhmetova.repositories.FileRepository;
 import ru.itis.shagiakhmetova.services.FileService;
-
 import javax.servlet.http.HttpServletResponse;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -22,6 +22,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@Log4j2
 public class FileServiceImpl implements FileService {
 
     private final AccountRepository accountRepository;

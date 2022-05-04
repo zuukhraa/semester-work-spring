@@ -1,18 +1,33 @@
-<!DOCTYPE html>
+<!doctype html>
+<html lang="en">
 <head>
     <title>Sign In</title>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/signIn.css">
+    <#include "head.ftlh"/>
 </head>
 <body>
-<h2>SignIn</h2>
+
+<div class="center">
+<h1>Вход</h1>
 <form action="/signIn" method="post">
+
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-    <input type="email" name="email" placeholder="Email">
-    <input type="password" name="password" placeholder="Password">
-    <label>
-        <input type="checkbox" name="rememberMe">Запомни меня
-    </label>
-    <input type="submit" value="Sign In">
+
+    <div class="txt_field">
+    <input type="email" name="email" placeholder="Почта">
+    </div>
+
+    <div class="txt_field">
+    <input type="password" name="password" placeholder="Пароль">
+    </div>
+
+    <div class="signup_link">Запомнить меня?
+        <input type="checkbox" name="rememberMe">
+    </div>
+
+    <input type="submit" value="войти">
 </form>
+</div>
 </body>
 </html>

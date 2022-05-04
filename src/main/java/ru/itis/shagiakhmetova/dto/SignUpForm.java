@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.itis.shagiakhmetova.helper.ValidEmail;
 import ru.itis.shagiakhmetova.helper.Validator;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -27,6 +28,7 @@ public class SignUpForm {
     private String password;
 
     @Email
+    @ValidEmail
     @NotBlank
     private String email;
 

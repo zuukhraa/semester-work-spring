@@ -55,4 +55,7 @@ public class Account {
     @OneToMany(mappedBy = "account")
     private List<Post> posts;
 
+    @ManyToMany
+    @JoinTable(joinColumns = @JoinColumn(name = "account_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "class_id", referencedColumnName = "id"))
+    private List<Class> classes;
 }

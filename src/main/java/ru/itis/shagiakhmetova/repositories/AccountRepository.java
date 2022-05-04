@@ -13,12 +13,14 @@ import java.util.Optional;
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Long> {
     Optional<Account> findByEmail (String email);
-    Account findAllByConfirmCode( String code);
+    Account findAllByConfirmCode(String code);
     List<Account> findAllByState(Account.State state);
+
     @Transactional
     @Modifying(clearAutomatically = true)
     @Query(value = "update accounts set first_name = :firstName, last_name = :lastName, password = :password where email = :email",  nativeQuery = true)
     void updateUser(@Param("firstName") String firstName, @Param("lastName") String lastName, @Param("password") String password, @Param("email") String email);
+
     @Query(value = "select * from accounts a WHERE a.email = :email", nativeQuery = true)
     Optional<Account> getAccountByEmail(@Param("email") String email);
 }

@@ -1,6 +1,7 @@
 package ru.itis.shagiakhmetova.services.Impl;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +22,8 @@ import static ru.itis.shagiakhmetova.dto.AccountDto.from;
 
 @Service
 @RequiredArgsConstructor
+@Log4j2
 public class AccountServiceImpl implements AccountService {
-
-    public static final Logger LOGGER = LoggerFactory.getLogger(AccountServiceImpl.class);
 
     @Autowired
     private final AccountRepository accountRepository;
@@ -34,7 +34,7 @@ public class AccountServiceImpl implements AccountService {
     private EmailUtil emailUtil;
 
     @Value("${server.port}")
-    String port;
+    String accountDto;
 
     @Transactional
     @Override
@@ -54,7 +54,7 @@ public class AccountServiceImpl implements AccountService {
         HashMap<String, String> data = new HashMap<>();
         data.put("confirm_code", newUser.getConfirmCode());
         data.put("first_name", newUser.getFirstName());
-        data.put("port", port);
+        data.put("port", accountDto);
         emailUtil.sendMail(newUser.getEmail(), "confirm", "mails/confirm_mail.ftlh",
                 data);
     }
@@ -86,6 +86,18 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public Optional<Account> getAccountByEmail(String email) {
         return accountRepository.getAccountByEmail(email);
+    }
+
+    @Override
+    public AccountDto save(AccountDto accountDto) {
+        return from(accountRepository.save(
+                 Account.builder()
+                .firstName(accountDto.getFirstName())
+                .lastName(accountDto.getLastName())
+                .email(accountDto.getEmail().toLowerCase(Locale.ROOT))
+                .password(passwordEncoder.encode(accountDto.getPassword()))
+                .faculty_name(accountDto.getFaculty_name())
+                .build()));
     }
 }
 
