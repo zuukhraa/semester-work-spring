@@ -2,8 +2,6 @@ package ru.itis.shagiakhmetova.services.Impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -11,11 +9,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.itis.shagiakhmetova.dto.AccountDto;
 import ru.itis.shagiakhmetova.dto.SignUpForm;
+import ru.itis.shagiakhmetova.helper.exceptions.AccountNotExistsException;
 import ru.itis.shagiakhmetova.models.Account;
 import ru.itis.shagiakhmetova.repositories.AccountRepository;
 import ru.itis.shagiakhmetova.services.AccountService;
 import ru.itis.shagiakhmetova.util.EmailUtil;
-
 import java.util.*;
 
 import static ru.itis.shagiakhmetova.dto.AccountDto.from;
@@ -25,7 +23,6 @@ import static ru.itis.shagiakhmetova.dto.AccountDto.from;
 @Log4j2
 public class AccountServiceImpl implements AccountService {
 
-    @Autowired
     private final AccountRepository accountRepository;
 
     private final PasswordEncoder passwordEncoder;
@@ -62,6 +59,9 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public void updateState(String confirmCode) {
         Account account = accountRepository.findAllByConfirmCode(confirmCode);
+        if (account == null) {
+            throw new AccountNotExistsException();
+        }
         account.setState(Account.State.CONFIRMED);
         accountRepository.save(account);
     }
@@ -73,7 +73,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void deleteAccount(Long accountId) {
-        Account account = accountRepository.getById(accountId);
+        Account account = accountRepository.findById(accountId).orElseThrow(AccountNotExistsException::new);
         account.setState(Account.State.DELETED);
         accountRepository.save(account);
     }
@@ -86,18 +86,6 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public Optional<Account> getAccountByEmail(String email) {
         return accountRepository.getAccountByEmail(email);
-    }
-
-    @Override
-    public AccountDto save(AccountDto accountDto) {
-        return from(accountRepository.save(
-                 Account.builder()
-                .firstName(accountDto.getFirstName())
-                .lastName(accountDto.getLastName())
-                .email(accountDto.getEmail().toLowerCase(Locale.ROOT))
-                .password(passwordEncoder.encode(accountDto.getPassword()))
-                .faculty_name(accountDto.getFaculty_name())
-                .build()));
     }
 }
 

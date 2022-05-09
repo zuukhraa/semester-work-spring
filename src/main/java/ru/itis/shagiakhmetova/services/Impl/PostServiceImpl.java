@@ -2,9 +2,9 @@ package ru.itis.shagiakhmetova.services.Impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.itis.shagiakhmetova.dto.PostDto;
+import ru.itis.shagiakhmetova.helper.exceptions.AccountNotExistsException;
 import ru.itis.shagiakhmetova.models.Account;
 import ru.itis.shagiakhmetova.models.Post;
 import ru.itis.shagiakhmetova.repositories.AccountRepository;
@@ -12,6 +12,7 @@ import ru.itis.shagiakhmetova.repositories.PostRepository;
 import ru.itis.shagiakhmetova.services.PostService;
 import java.time.LocalDate;
 import java.util.List;
+
 import static ru.itis.shagiakhmetova.dto.PostDto.from;
 
 @Service
@@ -19,15 +20,13 @@ import static ru.itis.shagiakhmetova.dto.PostDto.from;
 @Log4j2
 public class PostServiceImpl implements PostService {
 
-    @Autowired
     private final PostRepository postRepository;
 
-    @Autowired
     private final AccountRepository accountRepository;
 
     @Override
     public void addPost(PostDto postDto, Long accountId) {
-        Account account = accountRepository.getById(accountId);
+        Account account = accountRepository.findById(accountId).orElseThrow(AccountNotExistsException::new);
         Post newPost = Post.builder()
                 .title(postDto.getTitle())
                 .text(postDto.getText())

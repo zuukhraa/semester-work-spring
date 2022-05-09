@@ -13,5 +13,4 @@ public interface AccountService {
     void deleteAccount(Long accountId);
     void update(AccountDto accountDto, String email);
     Optional<Account> getAccountByEmail(String email);
-    AccountDto save(AccountDto accountDto);
 }

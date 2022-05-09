@@ -137,8 +137,6 @@
                             </table>
                         </td>
                     </tr>
-
-                    <!-- END MAIN CONTENT AREA -->
                 </table>
             </div>
         </td>
@@ -147,24 +145,3 @@
 </table>
 </body>
 </html>
-
-<#--<!DOCTYPE html>-->
-<#--<html lang="ru">-->
-<#--<head>-->
-<#--    <meta charset="UTF-8">-->
-<#--    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>-->
-<#--    <style>-->
-<#--        h1 {-->
-<#--            color: mediumvioletred;-->
-<#--        }-->
-<#--        h2 {-->
-<#--            color: red;-->
-<#--        }-->
-<#--    </style>-->
-<#--</head>-->
-<#--<body>-->
-<#--<h1>Спасибо за регистрацию, ${first_name}</h1>-->
-<#--<h1>Ссылка на регистрацию:</h1>-->
-<#--<h2><a href="localhost/confirm?code=${confirm_code}">Пройдите по ссылке</a></h2>-->
-<#--</body>-->
-<#--</html>-->

@@ -62,7 +62,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/signIn?logout")
                 .deleteCookies("JSESSIONID")
                 .invalidateHttpSession(true);
-
     }
 
     @Bean
@@ -71,5 +70,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         jdbcTokenRepository.setDataSource(dataSource);
         return jdbcTokenRepository;
     }
+
 
 }

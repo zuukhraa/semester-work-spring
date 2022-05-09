@@ -74,6 +74,9 @@ public class ProfileController {
 
     @PostMapping("profile/files/{account-id}/upload")
     public String uploadAvatar(@PathVariable(name = "account-id") Long accountId, @RequestParam("file") MultipartFile multipartFile) {
+        if (multipartFile.getOriginalFilename().isEmpty()) {
+            return "redirect:/profile";
+        }
         fileService.uploadAvatar(multipartFile, accountId);
         return "redirect:/profile";
     }

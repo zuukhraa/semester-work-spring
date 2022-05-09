@@ -18,6 +18,7 @@
     </#list>
 </table>
 <br>
-<td><p class="lead"><a href="/profile">Назад</a></p></td>
+<td><p class="lead">
+        <a href="/profile">Назад</a></p></td>
 </body>
 </html>

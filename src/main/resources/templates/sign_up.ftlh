@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title><@spring.message 'signUp.page.title'/></title>
+    <link rel="stylesheet" href="css/signUp.css">
     <#include "head.ftlh"/>
     <style>
         .error {
@@ -12,56 +13,47 @@
     </style>
 </head>
 <body>
+<div class="center">
 <h1><@spring.message 'signUp.page.header'/></h1>
-<br>
         <form action="/signUp" method="post">
             <@spring.bind path="signUpForm"/>
             <p class="error">${spring.status.errorMessage}</p>
 
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 
-            <label for="firstName"><@spring.message 'signUp.form.label.enterFirstName'/></label>
+            <div class="txt_field">
             <#assign i18Tooltip><@spring.message code="signUp.form.placeholder.firstName"/></#assign>
             <@spring.formInput "signUpForm.firstName" "placeholder=${i18Tooltip}"/>
-            <br>
+            </div>
             <@spring.showErrors "<br>" "error"/>
-            <br>
-            <br>
-            <label for="lastName"><@spring.message 'signUp.form.label.enterLastName'/></label>
+
+            <div class="txt_field">
             <#assign i18Tooltip><@spring.message code="signUp.form.placeholder.lastName"/></#assign>
             <@spring.formInput "signUpForm.lastName" "placeholder=${i18Tooltip}"/>
-            <br>
+            </div>
             <@spring.showErrors "<br>" "error"/>
-            <br>
-            <br>
-            <label for="email"><@spring.message 'signUp.form.label.enterEmail'/></label>
+
+            <div class="txt_field">
             <#assign i18Tooltip><@spring.message code="signUp.form.placeholder.email"/></#assign>
             <@spring.formInput "signUpForm.email" "placeholder=${i18Tooltip}"/>
-            <br>
+            </div>
             <@spring.showErrors "<br>" "error"/>
-            <br>
-            <br>
-            <label for="password"><@spring.message 'signUp.form.label.enterPassword'/></label>
+
+            <div class="txt_field">
             <#assign i18Tooltip><@spring.message code="signUp.form.placeholder.password"/></#assign>
             <@spring.formPasswordInput "signUpForm.password" "placeholder=${i18Tooltip}"/>
             <br>
+            </div>
             <@spring.showErrors "<br>" "error"/>
-            <br>
-            <br>
-            <label for="faculty_name"><@spring.message 'signUp.form.label.enterFaculty_name'/></label>
+
+            <div class="txt_field">
             <#assign i18Tooltip><@spring.message code="signUp.form.placeholder.faculty_name"/></#assign>
             <@spring.formInput "signUpForm.faculty_name" "placeholder=${i18Tooltip}"/>
-            <br>
+            </div>
             <@spring.showErrors "<br>" "error"/>
-            <br>
-            <br>
-            <input type="submit" value="Регистрация" class="submit">
-            <br>
-            <br>
+
+            <input type="submit" value="Зарегистрироваться" class="submit">
         </form>
+</div>
 </body>
 </html>
-
-
-
-

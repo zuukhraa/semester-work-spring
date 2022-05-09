@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import ru.itis.shagiakhmetova.helper.exceptions.AccountNotExistsException;
 import ru.itis.shagiakhmetova.models.Account;
 import ru.itis.shagiakhmetova.models.File;
 import ru.itis.shagiakhmetova.repositories.AccountRepository;
@@ -50,7 +51,7 @@ public class FileServiceImpl implements FileService {
             Files.copy(multipartFile.getInputStream(), Paths.get(storagePath, fileInfo.getStorageFileName()));
             fileRepository.save(fileInfo);
 
-            Account account = accountRepository.findById(accountId).orElseThrow(IllegalArgumentException::new);
+            Account account = accountRepository.findById(accountId).orElseThrow(AccountNotExistsException::new);
             account.setAvatar(filesUrl + fileInfo.getStorageFileName());
             accountRepository.save(account);
 
