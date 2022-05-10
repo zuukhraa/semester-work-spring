@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="main">
-    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+<#--    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">-->
         <div class="container">
             <div class="navbar">
                 <nav>

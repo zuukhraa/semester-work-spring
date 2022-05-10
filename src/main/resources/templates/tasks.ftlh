@@ -8,6 +8,14 @@
 
 <div class="container">
     <h1 class="mb-3">Задачи</h1>
+    <div class="row mb-3">
+    <div class="col-auto">
+        <input id="taskText" type="text" class="form-control" placeholder="Новая задача">
+    </div>
+    <div class="col-auto">
+        <button id="addTask" class="btn btn-primary">Добавить</button>
+    </div>
+    </div>
     <div id="tasks"></div>
 </div>
 <script src="js/tasks.js"></script>

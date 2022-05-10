@@ -15,7 +15,7 @@
     <@spring.bind path="accountDto"/>
     <p class="errors">${spring.status.errorMessage}</p>
 
-    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+<#--    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">-->
 
     <label for="firstName"><@spring.message 'account.form.label.enterFirstName'/></label>
     <#assign i18Tooltip><@spring.message code="account.form.placeholder.firstName"/></#assign>

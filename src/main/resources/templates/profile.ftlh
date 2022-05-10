@@ -19,6 +19,9 @@
     <div class="six">
         <a href="/accounts">Перейти в настройки - Администратор</a>
     </div>
+    <div class="six">
+        <a href="/tasks">Задачи</a>
+    </div>
 </#if>
 <br>
 <div class="six">
@@ -29,9 +32,6 @@
     <br>
     <br>
     <a href="profile/update">Изменить данные</a>
-    <br>
-    <br>
-    <a href="/tasks">Задачи</a>
     <br>
     <br>
     <a href="/logout">Выход</a>
@@ -49,7 +49,7 @@
 </#if>
 <form action="/profile/${account.id}/post" method="post">
 
-    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+<#--    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">-->
 <br>
     <td><p class="lead">Добавить пост</p></td>
     <br>
@@ -61,7 +61,7 @@
 <td><p class="lead">Загрузить аватар</p></td>
 <br>
     <form action="/profile/files/${account.id}/upload" method="post" enctype="multipart/form-data">
-    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+<#--    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">-->
     <input type="file" name="file">
     <input type="submit" value="Загрузить">
 </form>

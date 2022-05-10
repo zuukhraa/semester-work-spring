@@ -12,7 +12,7 @@
     </tr>
     <#list posts as post>
         <tr>
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+<#--            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">-->
             <td>${post.title}</td>
             <td>${post.text}</td>
             <td>${post.createdAt}</td>

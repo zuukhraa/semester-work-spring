@@ -14,7 +14,7 @@
         <tr>
             <td>
                 <form method="post" action="/accounts/${account.id}/delete">
-                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+<#--                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">-->
                     <input type="submit" value="Удалить">
                 </form>
             </td>

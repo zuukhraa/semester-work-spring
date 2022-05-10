@@ -19,7 +19,7 @@
             <@spring.bind path="signUpForm"/>
             <p class="error">${spring.status.errorMessage}</p>
 
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+<#--            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">-->
 
             <div class="txt_field">
             <#assign i18Tooltip><@spring.message code="signUp.form.placeholder.firstName"/></#assign>

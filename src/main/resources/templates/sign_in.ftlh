@@ -12,7 +12,7 @@
 <h1>Вход</h1>
 <form action="/signIn" method="post">
 
-    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+<#--    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">-->
 
     <div class="txt_field">
     <input type="email" name="email" placeholder="Почта">

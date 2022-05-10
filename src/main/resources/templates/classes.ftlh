@@ -10,7 +10,7 @@
     </tr>
     <#list classes as class>
         <tr>
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+<#--            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">-->
             <td>${class.name}</td>
             <td>${class.time}</td>
             <td></td>
